@@ -26,10 +26,10 @@ initial begin
   $finish;
 end
 
-initial begin
+/*initial begin
      $dumpfile("test.vcd");
      $dumpvars(0, testbench);
      #300000000 $finish;
-end
+end*/
 
 endmodule

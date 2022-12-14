@@ -75,6 +75,44 @@ module single_port_ram_sync
 reg [DATA_WIDTH-1:0] ram [2**ADDR_WIDTH-1:0];
 reg [ADDR_WIDTH-1:0] q_addr_a;
 
+wire [DATA_WIDTH-1:0] debug_ram;
+wire [DATA_WIDTH-1:0] debug_ram1;
+wire [DATA_WIDTH-1:0] debug_ram2;
+wire [DATA_WIDTH-1:0] debug_ram3;
+wire [DATA_WIDTH-1:0] debug_ram4;
+wire [DATA_WIDTH-1:0] debug_ram5;
+wire [DATA_WIDTH-1:0] debug_ram6;
+wire [DATA_WIDTH-1:0] debug_ram7;
+wire [DATA_WIDTH-1:0] debug_ram8;
+wire [DATA_WIDTH-1:0] debug_ram9;
+wire [DATA_WIDTH-1:0] debug_ram10;
+wire [DATA_WIDTH-1:0] debug_ram11;
+wire [DATA_WIDTH-1:0] debug_ram12;
+wire [DATA_WIDTH-1:0] debug_ram13;
+wire [DATA_WIDTH-1:0] debug_ram14;
+wire [DATA_WIDTH-1:0] debug_ram15;
+wire [DATA_WIDTH-1:0] debug_ram16;
+wire [DATA_WIDTH-1:0] debug_ram17;
+assign debug_ram = ram[131068];
+assign debug_ram1 = ram[130876];
+assign debug_ram2 = ram[130908];
+assign debug_ram3 = ram[130904];
+assign debug_ram4 = ram[130900];
+assign debug_ram5 = ram[130896];
+assign debug_ram6 = ram[196612];
+`define basic_add 4996
+assign debug_ram7 = ram[`basic_add];
+assign debug_ram8 = ram[`basic_add+4];
+assign debug_ram9 = ram[`basic_add+8];
+assign debug_ram10 = ram[`basic_add+12];
+assign debug_ram11 = ram[`basic_add+16];
+assign debug_ram12 = ram[`basic_add+20];
+assign debug_ram13 = ram[`basic_add+24];
+assign debug_ram14 = ram[`basic_add+28];
+assign debug_ram15 = ram[`basic_add+32];
+assign debug_ram16 = ram[`basic_add+36];
+assign debug_ram17 = ram[`basic_add+40];
+
 always @(posedge clk)
   begin
     if (we)

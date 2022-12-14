@@ -1,3 +1,4 @@
+`include "/mnt/c/Users/25693/Desktop/math/Computer_system/CPU/riscv/src/constant.v"
 module alu(
     input clk,
     input rst,
@@ -7,14 +8,20 @@ module alu(
     input [`DATA_WIDTH] in_rs_value_rs2,
     input [`DATA_WIDTH] in_rs_value_imm,
     input [`DATA_WIDTH] in_rs_pc,
+    input [`ROB_TAG_WIDTH] in_rs_reorder,
 
-    output [`DATA_WIDTH] out_rob_value, //rd
-    output [`ROB_TAG_WIDTH] out_update_reorder
+    output reg [`DATA_WIDTH] out_rob_value, //rd
+    output reg[`ROB_TAG_WIDTH] out_update_reorder,
+    output reg [`DATA_WIDTH] out_rob_newpc
 );
+
+    //assign out_update_reorder = in_rs_reorder;
+
   always @(posedge clk) begin
     if (rst == `TRUE) begin
-
+        
     end else if (rdy == `TRUE) begin
+        out_update_reorder <= in_rs_reorder;
         case(in_rs_op)
             `LUI:begin
                 out_rob_value <= in_rs_value_imm;
@@ -27,8 +34,33 @@ module alu(
             end
             `JALR:begin
                 out_rob_value <= in_rs_pc + 4;
+                out_rob_newpc <= in_rs_value_rs1 + in_rs_value_imm;
             end
 
+            `BEQ:begin
+                out_rob_value <= (in_rs_value_rs1 == in_rs_value_rs2) ? 1 : 0;
+                out_rob_newpc <= in_rs_pc + in_rs_value_imm;
+            end
+            `BNE:begin
+                out_rob_value <= (in_rs_value_rs1 != in_rs_value_rs2) ? 1 : 0;
+                out_rob_newpc <= in_rs_pc + in_rs_value_imm;
+            end
+            `BLT:begin
+                out_rob_value <= ($signed(in_rs_value_rs1) < $signed(in_rs_value_rs2)) ? 1 : 0;
+                out_rob_newpc <= in_rs_pc + in_rs_value_imm;
+            end
+            `BGE:begin
+                out_rob_value <= ($signed(in_rs_value_rs1) >= $signed(in_rs_value_rs2)) ? 1 : 0;
+                out_rob_newpc <= in_rs_pc + in_rs_value_imm;
+            end
+            `BLTU:begin
+                out_rob_value <= (in_rs_value_rs1 < in_rs_value_rs2) ? 1 : 0;
+                out_rob_newpc <= in_rs_pc + in_rs_value_imm;
+            end
+            `BGEU:begin
+                out_rob_value <= (in_rs_value_rs1 >= in_rs_value_rs2) ? 1 : 0;
+                out_rob_newpc <= in_rs_pc + in_rs_value_imm;
+            end
 
             `ADDI:begin
                 out_rob_value <= in_rs_value_rs1 + in_rs_value_imm;

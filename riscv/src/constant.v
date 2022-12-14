@@ -6,21 +6,33 @@
 `define INSIDE_OPCODE_WIDTH 5:0
 `define ROB_TAG_WIDTH 3:0 //Reorder Buffer size is 15. ZERO is not a real line.
 `define RS_TAG_WIDTH 3:0
+`define RAM_DATA_WIDTH 7:0
+`define RAM_ADDRESS_WIDTH 31:0
+`define WB_TAG_WIDTH 1:0
+`define SLB_TAG_WIDTH 3:0
+`define BP_BRANCH_TAG 7:0
+`define BP_HASH_TAG 9:2
 
 `define TRUE    1'b1
 `define FALSE   1'b0
 `define ICACHE_SIZE 256
-`define ZREO_DATA   32'b0
+`define ZERO_DATA   32'b0
 `define ZERO_REG_TAG    5'b0
-`define RS_SIZE 4'b1111
+`define RS_SIZE 16
 `define ZERO_RS_TAG 4'b0
 `define ZERO_ROB_TAG    4'b0
 `define ROB_SIZE    4'b1111
+`define WB_SIZE 4
+`define SLB_SIZE    16
+`define ZERO_SLB_TAG    4'b0
+`define IO_ADDRESS  32'h30000
+`define REG_SIZE    32
+`define BP_SIZE 256
 
 //Just define the instr by order
 `define LUI 6'b0
 `define AUIPC   6'b1
-`define JAL 6'10
+`define JAL 6'b10
 `define JALR    6'b11
 `define BEQ 6'b100
 `define BNE 6'b101
@@ -50,8 +62,8 @@
 `define SLL 6'b11101 
 `define SLT 6'b11110 
 `define SLTU    6'b11111 
-`define XOR 6'100000
-`define SRL 6'100001
+`define XOR 6'b100000
+`define SRL 6'b100001
 `define SRA 6'b100010 
 `define OR  6'b100011 
 `define AND 6'b100100

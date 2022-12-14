@@ -7,7 +7,7 @@
 
 //int a[10100];
 int a[10100];
-int n = 10000;
+int n = 100;
 
 int qsrt(int l, int r) {
     int i = l;
@@ -33,11 +33,21 @@ int main() {
     int i;
     for (i = 1; i <= n; i++)
         a[i] = n + 1 - i;
+    /*a[1]=10;
+    a[2]=5;
+    a[3]=6;
+    a[4]=9;
+    a[5]=8;
+    a[6]=3;
+    a[7]=2;
+    a[8]=1;
+    a[9]=4;
+    a[10]=7;*/
     qsrt(1, n);
     for (i = 1; i <= n; i++) {
 		outl(a[i]);
 		print(" ");
-        sleep(1); // to prevent UART buffer from overflowing
+        //sleep(1); // to prevent UART buffer from overflowing
 	}
     print("\n");
     return 0;
